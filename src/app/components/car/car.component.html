@@ -1,7 +1,11 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-danger" role="status">
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-danger"
+  role="status"
+>
   <span class="visually-hidden">Loading...</span>
 </div>
-<table *ngIf="dataLoaded==true" class="table">
+<table *ngIf="dataLoaded == true" class="table">
   <thead>
     <tr>
       <th>Car Id</th>
@@ -9,13 +13,108 @@
       <th>Brand Name</th>
       <th>Color Name</th>
       <th>Daily Price</th>
+      <th>More</th>
     </tr>
   </thead>
-  <tr *ngFor="let car of cars">
-    <td>{{ car.carId }}</td>
-    <td>{{ car.carName }}</td>
-    <td>{{ car.brandName }}</td>
-    <td>{{ car.colorName }}</td>
-    <td>{{ car.dailyPrice }}</td>
-  </tr>
+  <tbody>
+    <tr *ngFor="let car of cars">
+      <td>{{ car.carId }}</td>
+      <td>{{ car.carName }}</td>
+      <td>{{ car.brandName }}</td>
+      <td>{{ car.colorName }}</td>
+      <td>{{ car.dailyPrice }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-info"
+          data-bs-toggle="modal"
+          data-bs-target="#myModal"
+          (click)="setCurrentCar(car)"
+        >
+          View Details
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+<div
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table">
+              <tr>
+                <th>Car ID:</th>
+                <td>{{currentCar.carId}}</td>
+              </tr>
+              <tr>
+                <th>Car Name:</th>
+                <td>{{currentCar.carName}}</td>
+              </tr>
+              <tr>
+                <th>Model Year:</th>
+                <td>{{currentCar.modelYear}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table">
+              <tr>
+                <th>Brand Name:</th>
+                <td>{{currentCar.brandName}}</td>
+              </tr>
+              <tr>
+                <th>Color Name:</th>
+                <td>{{currentCar.colorName}}</td>
+              </tr>
+              <tr>
+                <th>Daily Price:</th>
+                <td>{{currentCar.dailyPrice}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-12">
+            <table class="table">
+              <tr>
+                <th>Description:</th>
+              </tr>
+              <tr>
+                <td>{{currentCar.description}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Rent</button>
+      </div>
+    </div>
+  </div>
+</div>
