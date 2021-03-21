@@ -3,6 +3,7 @@ import { Car } from 'src/app/models/car';
 import { HttpClient } from '@angular/common/http';
 import { CarService } from 'src/app/services/car.service';
 import { ActivatedRoute } from '@angular/router';
+import { CarImage } from 'src/app/models/carImage';
 
 @Component({
   selector: 'app-car',
@@ -11,7 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CarComponent implements OnInit {
   cars: Car[];
+  carImages:CarImage[]=[];
+  path = "https://localhost:44322/wwwroot";
   currentCar:Car={ carId:0,carName:"", brandName:"",colorName:"",modelYear:0,dailyPrice:0,description:""};
+  currenCarImage:CarImage;
   dataLoaded = false;
   
 
@@ -50,5 +54,18 @@ export class CarComponent implements OnInit {
   }
   setCurrentCar(car:Car){
     this.currentCar=car
+  }
+  getCarImageById(carId:number){
+    this.carService.getCarImageByCarId(this.currentCar.carId).subscribe(response=>{
+      this.carImages=response.data
+      this.dataLoaded = true;
+      console.log(this.carImages);
+    })
+  }
+  getCurrentSlideClass(carImage:CarImage){
+    if (carImage == this.carImages[0]) {
+      return "carousel-item active"
+    }
+    return "carousel-item"
   }
 }
