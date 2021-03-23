@@ -15,7 +15,7 @@ export class CarComponent implements OnInit {
   carImages:CarImage[]=[];
   path = "https://localhost:44322/wwwroot";
   currentCar:Car={ carId:0,carName:"", brandName:"",colorName:"",modelYear:0,dailyPrice:0,description:""};
-  currenCarImage:CarImage;
+  currentCarImage:CarImage;
   dataLoaded = false;
   
 
@@ -60,6 +60,12 @@ export class CarComponent implements OnInit {
       this.carImages=response.data
       this.dataLoaded = true;
       console.log(this.carImages);
+    })
+  }
+  getCurrentCarImage(carId:number){
+    this.carService.getCarImageByCarId(this.currentCar.carId).subscribe(response=>{
+      this.currentCarImage=response.data[0]
+      this.dataLoaded = true;
     })
   }
   getCurrentSlideClass(carImage:CarImage){

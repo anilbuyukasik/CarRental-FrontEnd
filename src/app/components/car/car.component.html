@@ -5,7 +5,40 @@
 >
   <span class="visually-hidden">Loading...</span>
 </div>
-<table *ngIf="dataLoaded == true" class="table">
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let car of cars">
+    <div class="card" style="width: 18rem">
+      <p [class]="setCurrentCar(car)"></p>
+      <p [class]="getCurrentCarImage(currentCar.carId)"></p>
+      <img
+        class="card-img-top"
+        src="https://localhost:44322{{ currentCarImage.imagePath }}"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ car.brandName }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{ car.carName }}</li>
+        <li class="list-group-item">Daily Price: {{ car.dailyPrice | currency: "TRY":"₺" }}</li>
+      </ul>
+      <div class="card-body">
+        <div class="row">
+          <div class="btn-group">
+            <div class="col-md-6">
+              <button class="btn btn-primary">More Details</button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-success" style="width: 100%">Rent</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <table *ngIf="dataLoaded == true" class="table">
   <thead>
     <tr>
       <th>Car Id</th>
@@ -36,9 +69,9 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
 
-<div
+<!-- <div
   class="modal fade"
   id="myModal"
   tabindex="-1"
@@ -60,25 +93,49 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div
+              id="carouselExampleControls"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
               <div class="carousel-inner">
-
-                <div *ngFor="let carImage of carImages" [class]="getCurrentSlideClass(carImage)" >
-                  <img src="https://localhost:44322{{ carImage.imagePath }}" class="d-block w-100" alt="..." style="width: auto; height: 300px;">
+                <div
+                  *ngFor="let carImage of carImages"
+                  [class]="getCurrentSlideClass(carImage)"
+                >
+                  <img
+                    src="https://localhost:44322{{ carImage.imagePath }}"
+                    class="d-block w-100"
+                    alt="..."
+                    style="width: auto; height: 300px"
+                  />
                 </div>
-               
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
-
           </div>
         </div>
         <div class="row">
@@ -86,15 +143,15 @@
             <table class="table">
               <tr>
                 <th>Car ID:</th>
-                <td>{{currentCar.carId}}</td>
+                <td>{{ currentCar.carId }}</td>
               </tr>
               <tr>
                 <th>Car Name:</th>
-                <td>{{currentCar.carName}}</td>
+                <td>{{ currentCar.carName }}</td>
               </tr>
               <tr>
                 <th>Model Year:</th>
-                <td>{{currentCar.modelYear}}</td>
+                <td>{{ currentCar.modelYear }}</td>
               </tr>
             </table>
           </div>
@@ -102,15 +159,15 @@
             <table class="table">
               <tr>
                 <th>Brand Name:</th>
-                <td>{{currentCar.brandName}}</td>
+                <td>{{ currentCar.brandName }}</td>
               </tr>
               <tr>
                 <th>Color Name:</th>
-                <td>{{currentCar.colorName}}</td>
+                <td>{{ currentCar.colorName }}</td>
               </tr>
               <tr>
                 <th>Daily Price:</th>
-                <td>{{currentCar.dailyPrice}}</td>
+                <td>{{ currentCar.dailyPrice }}</td>
               </tr>
             </table>
           </div>
@@ -120,7 +177,7 @@
                 <th>Description:</th>
               </tr>
               <tr>
-                <td>{{currentCar.description}}</td>
+                <td>{{ currentCar.description }}</td>
               </tr>
             </table>
           </div>
@@ -134,4 +191,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
