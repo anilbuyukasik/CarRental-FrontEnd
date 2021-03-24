@@ -10,6 +10,7 @@
         <th>Color Name</th>
         <th>Daily Price</th>
         <th>Customer</th>
+        <th>Total Price</th>
       </tr>
     </thead>
     <tr *ngFor="let rental of rentals">
@@ -19,6 +20,7 @@
       <td>{{ rental.colorName }}</td>
       <td>{{ rental.dailyPrice }}</td>
       <td>{{ rental.firstName }} {{ rental.lastName }}</td>
+      <td>{{ rental.totalPrice }}</td>
     </tr>
   </table>
   

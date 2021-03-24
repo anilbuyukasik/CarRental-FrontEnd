@@ -6,4 +6,5 @@ export interface Rental{
     dailyPrice:number;
     firstName:string;
     lastName:string;
+    totalPrice:number;
 }

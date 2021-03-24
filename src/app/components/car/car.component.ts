@@ -14,7 +14,7 @@ export class CarComponent implements OnInit {
   cars: Car[];
   carImages:CarImage[]=[];
   path = "https://localhost:44322/wwwroot";
-  currentCar:Car={ carId:0,carName:"", brandName:"",colorName:"",modelYear:0,dailyPrice:0,description:""};
+  currentCar:Car={ carId:0,carName:"", brandName:"",colorName:"",modelYear:0,dailyPrice:0,description:"", imagePaths:[]};
   currentCarImage:CarImage;
   dataLoaded = false;
   
