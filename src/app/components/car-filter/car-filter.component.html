@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="mb-3">
+            <label for="brands">Brands</label>
+            <input type="text" placeholder="Search brand name" class="form-control" [(ngModel)]="brandFilterText">
+            <select class="form-select" aria-label="brands" [(ngModel)]="selectedBrand">
+                <option  value="0">All Brands</option>
+                <option *ngFor="let brand of brands" [value]="brand.brandId">{{brand.brandName}}</option>
+              </select>
+        </div>
+        <div class="mb-3">
+            <label for="colors">Colors</label>
+            <input type="text" placeholder="Search color name" class="form-control" [(ngModel)]="colorFilterText">
+            <select class="form-select" aria-label="colors" [(ngModel)]="selectedColor">
+                <option  value="0">All Colors</option>
+                <option *ngFor="let color of colors" [value]="color.colorId" [selected]=getSelectedColor(color.colorId)>{{color.colorName}}</option>
+              </select>
+        </div>
+        <div class="row">
+            <div class="col-md-6"><button class="btn btn-secondary">Clear</button></div>
+            <div class="col-md-6"><button class="btn btn-success">Filter</button></div>
+        </div>
+    </div>
+</div>
