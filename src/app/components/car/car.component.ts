@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CarService } from 'src/app/services/car.service';
 import { ActivatedRoute } from '@angular/router';
 import { CarImage } from 'src/app/models/carImage';
+import { CarDetail } from 'src/app/models/car-detail';
 
 @Component({
   selector: 'app-car',
@@ -11,10 +12,10 @@ import { CarImage } from 'src/app/models/carImage';
   styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
-  cars: Car[];
+  cars: CarDetail[];
   carImages:CarImage[]=[];
   path = "https://localhost:44322/wwwroot";
-  currentCar:Car={ carId:0,carName:"", brandName:"",colorName:"",modelYear:0,dailyPrice:0,description:"", imagePaths:[]};
+  currentCar:CarDetail={ carId:0,carName:"",brandId:0,colorId:0, brandName:"",colorName:"",modelYear:0,dailyPrice:0,description:"", imagePaths:[]};
   currentCarImage:CarImage;
   dataLoaded = false;
   
@@ -52,7 +53,7 @@ export class CarComponent implements OnInit {
       this.dataLoaded=true
     })
   }
-  setCurrentCar(car:Car){
+  setCurrentCar(car:CarDetail){
     this.currentCar=car
   }
   getCarImageById(carId:number){
@@ -74,4 +75,7 @@ export class CarComponent implements OnInit {
     }
     return "carousel-item"
   }
+  getDateTime = function() {
+    return (new Date).toLocaleDateString("%A, %B %e, %Y");
+  };
 }

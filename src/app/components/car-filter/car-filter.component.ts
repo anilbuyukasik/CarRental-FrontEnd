@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
@@ -12,11 +12,14 @@ import { ColorService } from 'src/app/services/color.service';
 export class CarFilterComponent implements OnInit {
 
   brands:Brand[];
-  selectedBrand:number;
+  selectedBrand:Brand;
+  allBrands:Brand={brandId:0,brandName:""};
   brandFilterText:string;
 
+
   colors:Color[];
-  selectedColor:number=1;
+  selectedColor:Color;
+  allColors:Color
   colorFilterText:string;
 
   constructor(private brandService:BrandService, private colorService:ColorService) { }
@@ -36,22 +39,50 @@ export class CarFilterComponent implements OnInit {
       this.colors=response.data
     });
   }
-  getSelectedBrand(brandId: Number) {
-    if (this.selectedBrand == brandId) {
+  setCurrentBrand(brand:Brand){
+      this.selectedBrand=brand;
+      console.log(brand.brandId)
+   
+  }
+  setCurrentColor(color:Color){
+      this.selectedColor = color;
+   
+  }
+  allBrandsSelected(){
+    return this.selectedBrand == undefined ? true:false;
+  }
+  allColorsSelected(){
+    return this.selectedColor == undefined ? true:false;
+  }
+  // currentBrandId(event: any) {
+  //   this.brandId=event;
+  // }
+
+  // currentColorId(event: any) {
+  //   this.colorId=event;
+  // }
+
+  getSelectedBrand(brand: Brand) {
+    if (this.selectedBrand == brand) {
       return "selected";
+      console.log(brand.brandId)
     }
     else {
       return "";
     }
   }
 
-  getSelectedColor(colorId: Number) {
-    if (this.selectedColor == colorId) {
+  getSelectedColor(color: Color) {
+    if (this.selectedColor == color) {
       return "selected";
     }
     else {
       return "";
     }
   }
-
+  selectChangeHandler (event: any) {
+    //update the ui
+    this.selectedBrand = event.target.value;
+    console.log(this.selectedBrand);
+}
 }
