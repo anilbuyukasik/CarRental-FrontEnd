@@ -3,8 +3,8 @@
         <div class="mb-3">
             <label for="brands">Brands</label>
             <input type="text" placeholder="Search brand name" class="form-control" [(ngModel)]="brandFilterText">
-            <select class="form-select" [(ngModel)]="selectedBrand" (change)="selectChangeHandler($event)" >
-                <option  [value]="allBrands.brandId"[selected]="allBrandsSelected()" class="option">All Brands</option>
+            <select class="form-select" [(ngModel)]="selectedBrand" (change)="selectCurrentBrand($event)" >
+                <option  [value]="allBrands"[selected]="allBrandsSelected()" class="option">All Brands</option>
                 <option *ngFor="let brand of brands" [value]="brand.brandId" >{{brand.brandName}}</option>
               </select>
         </div>
@@ -13,17 +13,17 @@
         <div class="mb-3">
             <label for="colors">Colors</label>
             <input type="text" placeholder="Search color name" class="form-control" [(ngModel)]="colorFilterText">
-            <select class="form-select" [(ngModel)]="selectedColor">
+            <select class="form-select" [(ngModel)]="selectedColor" (change)="selectCurrentColor($event)">
                 <option  [value]="allColors" [selected]="allColorsSelected()" class="option">All Colors</option>
-                <option *ngFor="let color of colors" [ngValue]="color.colorId" >{{color.colorName}}</option>
+                <option *ngFor="let color of colors" [value]="color.colorId" >{{color.colorName}}</option>
               </select>
         </div>
     </div>
     
     <div class="col-md-4">
         <div class="row">
-            <div class="col-md-6"><button class="btn btn-secondary w-100">Clear</button></div>
-            <div class="col-md-6"><button class="btn btn-success w-100">Filter</button></div>
+            <div class="col-md-6"><button class="btn btn-secondary w-100" (click)="clearFilter()">Clear</button></div>
+            <div class="col-md-6"><button class="btn btn-success w-100" (click)="setFilter()">Filter</button></div>
         </div>
     </div>
 </div>
