@@ -12,13 +12,13 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class CarFilterComponent implements OnInit {
   brands: Brand[];
-  selectedBrand: number;
-  allBrands: Brand;
+  selectedBrand: number = 0;
+  allBrands: number = 0;
   brandFilterText: string;
 
   colors: Color[];
-  selectedColor: number;
-  allColors: Color;
+  selectedColor: number = 0;
+  allColors: number = 0;
   colorFilterText: string;
 
   constructor(
@@ -44,10 +44,10 @@ export class CarFilterComponent implements OnInit {
     });
   }
   allBrandsSelected() {
-    return this.selectedBrand == undefined ? true : false;
+    return this.selectedBrand == 0 ? true : false;
   }
   allColorsSelected() {
-    return this.selectedColor == undefined ? true : false;
+    return this.selectedColor == 0 ? true : false;
   }
 
   selectCurrentBrand(event: any) {
@@ -61,15 +61,15 @@ export class CarFilterComponent implements OnInit {
     console.log(this.selectedColor);
   }
   setFilter(){
-    if(this.selectedBrand != undefined && this.selectedColor != undefined){
+    if(this.selectedBrand != 0 && this.selectedColor != 0){
       this.router.navigate([
         'cars/brand/'+this.selectedBrand+'/color/'+this.selectedColor
       ]);
     }
-    else if(this.selectedBrand != undefined && this.selectedColor == undefined){
+    else if(this.selectedBrand != 0 && this.selectedColor == 0){
       this.router.navigate(['cars/brand/'+this.selectedBrand]);
     }
-    else if(this.selectedBrand == undefined && this.selectedColor != undefined){
+    else if(this.selectedBrand == 0 && this.selectedColor != 0){
       this.router.navigate(['cars/color/'+this.selectedColor]);
     }
     else{

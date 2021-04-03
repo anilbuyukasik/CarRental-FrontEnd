@@ -5,9 +5,14 @@
 >
   <span class="visually-hidden">Loading...</span>
 </div>
-
 <div class="row">
-  <div class="col-md-4" *ngFor="let car of cars">
+  <div class="col-md-12">
+    <input class="form-control me-2" id="carFilterText" type="search" placeholder="Search car by name" aria-label="Search" [(ngModel)]="carFilterText">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-4" *ngFor="let car of cars | carFilter: carFilterText">
     <div class="card" style="width: 18rem">
       <!-- <p [class]="setCurrentCar(car)"></p>
       <p [class]="getCurrentCarImage(currentCar.carId)"></p> -->
