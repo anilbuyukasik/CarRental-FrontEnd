@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-6">
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#brandModal"
+    >
+      Add Brand
+    </button>
+  </div>
+  <div class="col-md-6">
+    <input
+      type="text"
+      name="brandName"
+      class="form-control"
+      placeholder="Search brand name"
+      [(ngModel)]="brandFilterText"
+    />
+  </div>
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Brand Id</th>
+          <th scope="col">Brand Name</th>
+          <th scope="col">#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brands | brandFilter: brandFilterText">
+          <th>{{ brand.brandId }}</th>
+          <td>{{ brand.brandName }}</td>
+          <td><button class="btn btn-warning">Modify</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-brand-add></app-brand-add>

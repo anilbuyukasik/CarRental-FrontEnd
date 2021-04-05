@@ -1,3 +1,4 @@
+<app-car-filter></app-car-filter>
 <div
   *ngIf="dataLoaded == false"
   class="spinner-border text-danger"
@@ -7,10 +8,17 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <input class="form-control me-2" id="carFilterText" type="search" placeholder="Search car by name" aria-label="Search" [(ngModel)]="carFilterText">
+    <input
+      class="form-control me-2"
+      id="carFilterText"
+      type="search"
+      placeholder="Search car by name"
+      aria-label="Search"
+      [(ngModel)]="carFilterText"
+    />
   </div>
 </div>
-<br>
+<br />
 <div class="row">
   <div class="col-md-4" *ngFor="let car of cars | carFilter: carFilterText">
     <div class="card" style="width: 18rem">
@@ -46,13 +54,15 @@
               </button>
             </div>
             <div class="col-md-6">
-              <button 
-              class="btn btn-success" 
-              style="width: 100%"
-              (click)="setCurrentCar(car); getCarImageById(car.carId)"
-              data-bs-toggle="modal"
-              data-bs-target="#rental"
-              >Rent</button>
+              <button
+                class="btn btn-success"
+                style="width: 100%"
+                (click)="setCurrentCar(car); getCarImageById(car.carId)"
+                data-bs-toggle="modal"
+                data-bs-target="#rental"
+              >
+                Rent
+              </button>
             </div>
           </div>
         </div>
@@ -157,7 +167,7 @@
               </tr>
               <tr>
                 <th>Daily Price:</th>
-                <td>{{ currentCar.dailyPrice }}</td>
+                <td>{{ currentCar.dailyPrice | currency: "TRY":"₺" }}</td>
               </tr>
             </table>
           </div>
@@ -252,14 +262,18 @@
         <div class="row">
           <div class="col-md-6">
             <label for="rentDate">Rent Date:</label>
-            <input type = "date" name="rentDate" class="form-control">
+            <input type="date" name="rentDate" class="form-control" />
           </div>
           <div class="col-md-6">
             <label for="returnDate">Return Date:</label>
-            <input type = "date" name="returnDate" class="form-control">
+            <input type="date" name="returnDate" class="form-control" />
           </div>
-          <hr>
-          <div class="col-md-12"><label for="" class="form-control">Total Price:</label></div>
+          <div class="col-md-12">
+            <label for="customerName">Customer Name:</label>
+            <select class="form-select">
+              <option *ngFor="let customer of customers" [value]="customer.customerId" >{{customer.firstName}} {{customer.lastName}}</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
