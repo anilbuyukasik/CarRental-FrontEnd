@@ -16,6 +16,12 @@ export class BrandService {
     return this.httpClient.get<ListResponseModel<Brand>>(this.apiUrl+"brands/getall");
   }
   add(brand:Brand){
-    return this.httpClient.post(this.apiUrl+"brands/add",brand)
+    return this.httpClient.post(this.apiUrl+"brands/add", brand)
+  }
+  getById(brandId:number):Observable<ListResponseModel<Brand>>{
+    return this.httpClient.get<ListResponseModel<Brand>>(this.apiUrl + "brands/getbyid?id=" + brandId);
+  }
+  update(brand:Brand){
+    return this.httpClient.post(this.apiUrl + "brands/update",brand);
   }
 }

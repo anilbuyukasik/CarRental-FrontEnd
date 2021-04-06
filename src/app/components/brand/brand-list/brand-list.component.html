@@ -30,10 +30,63 @@
         <tr *ngFor="let brand of brands | brandFilter: brandFilterText">
           <th>{{ brand.brandId }}</th>
           <td>{{ brand.brandName }}</td>
-          <td><button class="btn btn-warning">Modify</button></td>
+          <td><button class="btn btn-warning" data-bs-toggle="modal"
+            data-bs-target="#brandUpdateModal"
+            (click)="setSelectedBrand(brand)">Modify</button></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 <app-brand-add></app-brand-add>
+
+
+
+<div
+  class="modal fade"
+  id="brandUpdateModal"
+  tabindex="-1"
+  aria-labelledby="brandModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="brandModalLabel">Add Brand</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="brandUpdateForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="brandName">Brand Name:</label>
+            <input
+              type="text"
+              formControlName="brandName"
+              id="brandName"
+              class="form-control"
+              placeholder="Brand name"
+              value="{{selectedBrand}}"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="update()" data-bs-dismiss="modal">
+            Save Brand
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
