@@ -30,17 +30,22 @@
         <tr *ngFor="let brand of brands | brandFilter: brandFilterText">
           <th>{{ brand.brandId }}</th>
           <td>{{ brand.brandName }}</td>
-          <td><button class="btn btn-warning" data-bs-toggle="modal"
-            data-bs-target="#brandUpdateModal"
-            (click)="setSelectedBrand(brand)">Modify</button></td>
+          <td>
+            <button
+              class="btn btn-warning"
+              data-bs-toggle="modal"
+              data-bs-target="#brandUpdateModal"
+              (click)="setSelectedBrand(brand)"
+            >
+              Modify
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 <app-brand-add></app-brand-add>
-
-
 
 <div
   class="modal fade"
@@ -63,14 +68,25 @@
       <form [formGroup]="brandUpdateForm">
         <div class="modal-body">
           <div class="form-group">
+            <label for="brandId">Brand Id:</label>
+            <input
+              type="text"
+              readonly
+              formControlName="brandId"
+              id="brandId"
+              class="form-control"
+              value="{{ selectedBrand.brandId }}"
+            />
+          </div>
+          <div class="form-group">
             <label for="brandName">Brand Name:</label>
             <input
               type="text"
               formControlName="brandName"
-              id="brandName"
+              id="brandUpdateName"
               class="form-control"
               placeholder="Brand name"
-              value="{{selectedBrand}}"
+              value="{{ selectedBrand.brandName }}"
             />
           </div>
         </div>
@@ -82,7 +98,12 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary" (click)="update()" data-bs-dismiss="modal">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="update()"
+            data-bs-dismiss="modal"
+          >
             Save Brand
           </button>
         </div>

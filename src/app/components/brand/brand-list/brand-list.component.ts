@@ -12,7 +12,7 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandListComponent implements OnInit {
 
   brands: Brand[];
-  selectedBrand:Brand;
+  selectedBrand:Brand={brandId:0,brandName:""};
   brandUpdateForm:FormGroup;
   brandFilterText:string;
   constructor(private brandService:BrandService,private formBuilder:FormBuilder, private toastrService:ToastrService) { }
@@ -26,17 +26,19 @@ export class BrandListComponent implements OnInit {
       this.brands = response.data;
     });
   }
-  getById(brandId:number){
-    this.brandService.getById(brandId).subscribe((response)=>{
-      this.brands = response.data
-    })
-  }
+  // getById(brandId:number){
+  //   this.brandService.getById(brandId).subscribe((response)=>{
+  //     this.brands = response.data
+  //   })
+  // }
   setSelectedBrand(brand:Brand){
     this.selectedBrand=brand;
+    this.createBrandUpdateForm();
   }
   createBrandUpdateForm(){
     this.brandUpdateForm = this.formBuilder.group({
-      brandName:["",Validators.required]
+      brandId:[this.selectedBrand.brandId,Validators.required],
+      brandName:[this.selectedBrand.brandName,Validators.required]
     })
   }
   update(){
@@ -44,7 +46,10 @@ export class BrandListComponent implements OnInit {
       let brandModel = Object.assign({},this.brandUpdateForm.value) 
       this.brandService.update(brandModel).subscribe(response=>{
         console.log(response);
-        this.toastrService.success("Brand is updated!")
+        this.toastrService.success(response.message);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       })
       
     }else{
