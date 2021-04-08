@@ -26,11 +26,6 @@ export class BrandListComponent implements OnInit {
       this.brands = response.data;
     });
   }
-  // getById(brandId:number){
-  //   this.brandService.getById(brandId).subscribe((response)=>{
-  //     this.brands = response.data
-  //   })
-  // }
   setSelectedBrand(brand:Brand){
     this.selectedBrand=brand;
     this.createBrandUpdateForm();

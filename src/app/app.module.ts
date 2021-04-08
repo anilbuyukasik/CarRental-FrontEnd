@@ -23,6 +23,10 @@ import {ToastrModule} from "ngx-toastr";
 import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
 import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
 import { BrandListComponent } from './components/brand/brand-list/brand-list.component';
+import { ColorListComponent } from './components/color/color-list/color-list.component';
+import { ColorAddComponent } from './components/color/color-add/color-add.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component';
+import { CarListComponent } from './components/car/car-list/car-list.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { BrandListComponent } from './components/brand/brand-list/brand-list.com
     PaymentComponent,
     BrandAddComponent,
     CustomerAddComponent,
-    BrandListComponent
+    BrandListComponent,
+    ColorListComponent,
+    ColorAddComponent,
+    CarAddComponent,
+    CarListComponent
   ],
   imports: [
     BrowserModule,
