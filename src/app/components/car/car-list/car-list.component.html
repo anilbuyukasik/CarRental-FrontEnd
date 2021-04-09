@@ -1,55 +1,165 @@
 <div class="row">
-    <div class="col-md-6">
-      <button
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#brandModal"
-      >
-        Add Car
-      </button>
-    </div>
-    <div class="col-md-6">
-      <input
-        type="text"
-        name="carName"
-        class="form-control"
-        placeholder="Search car name"
-        [(ngModel)]="carFilterText"
-      />
-    </div>
-    <div class="col-md-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Car Id</th>
-            <th scope="col">Car Name</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Color</th>
-            <th scope="col">Daily Price</th>
-            <th scope="col">Model Year</th>
-            <th scope="col">#</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let car of cars | carFilter: carFilterText">
-            <th>{{ car.carId }}</th>
-            <td>{{ car.carName }}</td>
-            <td>{{ car.brandName }}</td>
-            <td>{{ car.colorName }}</td>
-            <td>{{ car.dailyPrice| currency: "TRY":"₺" }}</td>
-            <td>{{ car.modelYear }}</td>
-            <td>
-              <button
-                class="btn btn-warning"
-                data-bs-toggle="modal"
-                data-bs-target="#carUpdateModal"
-                (click)="setSelectedCar(car)"
-              >
-                Modify
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="col-md-6">
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#brandModal"
+    >
+      Add Car
+    </button>
+  </div>
+  <div class="col-md-6">
+    <input
+      type="text"
+      name="carName"
+      class="form-control"
+      placeholder="Search car name"
+      [(ngModel)]="carFilterText"
+    />
+  </div>
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Car Id</th>
+          <th scope="col">Car Name</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Color</th>
+          <th scope="col">Daily Price</th>
+          <th scope="col">Model Year</th>
+          <th scope="col">#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars | carFilter: carFilterText">
+          <th>{{ car.carId }}</th>
+          <td>{{ car.carName }}</td>
+          <td>{{ car.brandName }}</td>
+          <td>{{ car.colorName }}</td>
+          <td>{{ car.dailyPrice | currency: "TRY":"₺" }}</td>
+          <td>{{ car.modelYear }}</td>
+          <td>
+            <button
+              class="btn btn-warning"
+              data-bs-toggle="modal"
+              data-bs-target="#carUpdateModal"
+              (click)="setSelectedCar(car)"
+            >
+              Modify
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--Car Update Modal-->
+<div
+  class="modal fade"
+  id="carUpdateModal"
+  tabindex="-1"
+  aria-labelledby="carModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="carModalLabel">Update Car</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="carUpdateForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="carId">Car Id:</label>
+            <input
+              type="text"
+              readonly
+              formControlName="carId"
+              id="carId"
+              class="form-control"
+              value="{{ selectedCar.carId }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="carName">Car Name:</label>
+            <input
+              type="text"
+              formControlName="carName"
+              id="carUpdateName"
+              class="form-control"
+              placeholder="Car name"
+              value="{{ selectedCar.carName }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="brandName">Brand Name:</label>
+            <select class="form-select" formControlName="brandId">
+              <option *ngFor="let brand of brands" [ngValue]="brand.brandId" [value]="brand.brandId" [selected]="{{brand.brandId==selectedCar.brandId?'selected':false}}">
+                {{ brand.brandName }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="colorName">Color Name:</label>
+            <select class="form-select" formControlName="colorId">
+              <option *ngFor="let color of colors" [ngValue]="color.colorId" [selected]="selectedCar.colorName">
+                {{ color.colorName }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dailyPrice">Daily Price:</label>
+            <input
+              type="text"
+              formControlName="dailyPrice"
+              class="form-control"
+              placeholder="Car name"
+              value="{{ selectedCar.dailyPrice }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="modelYear">Model Year:</label>
+            <input
+              type="text"
+              formControlName="modelYear"
+              class="form-control"
+              placeholder="Model year"
+              value="{{ selectedCar.modelYear }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea
+              formControlName="description"
+              cols="30"
+              rows="10"
+              placeholder="Description"
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="update()"
+            data-bs-dismiss="modal"
+          >
+            Save Car
+          </button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
