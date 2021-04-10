@@ -4,6 +4,7 @@ import { BrandListComponent } from './components/brand/brand-list/brand-list.com
 import { CarListComponent } from './components/car/car-list/car-list.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorListComponent } from './components/color/color-list/color-list.component';
+import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:"payments",component:PaymentComponent},
   {path:"brands",component:BrandListComponent},
   {path:"colors",component:ColorListComponent},
-  {path:"car-list",component:CarListComponent}
+  {path:"car-list",component:CarListComponent},
+  {path:"login",component:LoginComponent}
 ];
 
 @NgModule({

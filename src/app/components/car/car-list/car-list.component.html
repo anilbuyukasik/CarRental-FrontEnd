@@ -3,7 +3,7 @@
     <button
       class="btn btn-primary"
       data-bs-toggle="modal"
-      data-bs-target="#brandModal"
+      data-bs-target="#carModal"
     >
       Add Car
     </button>
@@ -43,7 +43,7 @@
               class="btn btn-warning"
               data-bs-toggle="modal"
               data-bs-target="#carUpdateModal"
-              (click)="setSelectedCar(car)"
+              (click)="setSelectedCar(car);"
             >
               Modify
             </button>
@@ -99,7 +99,7 @@
           <div class="form-group">
             <label for="brandName">Brand Name:</label>
             <select class="form-select" formControlName="brandId">
-              <option *ngFor="let brand of brands" [ngValue]="brand.brandId" [value]="brand.brandId" [selected]="{{brand.brandId==selectedCar.brandId?'selected':false}}">
+              <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
                 {{ brand.brandName }}
               </option>
             </select>
@@ -107,7 +107,7 @@
           <div class="form-group">
             <label for="colorName">Color Name:</label>
             <select class="form-select" formControlName="colorId">
-              <option *ngFor="let color of colors" [ngValue]="color.colorId" [selected]="selectedCar.colorName">
+              <option *ngFor="let color of colors" [ngValue]="color.colorId" class="option" selected="{{selectedCar.colorId}}">
                 {{ color.colorName }}
               </option>
             </select>
@@ -115,7 +115,7 @@
           <div class="form-group">
             <label for="dailyPrice">Daily Price:</label>
             <input
-              type="text"
+              type="number"
               formControlName="dailyPrice"
               class="form-control"
               placeholder="Car name"
@@ -125,7 +125,7 @@
           <div class="form-group">
             <label for="modelYear">Model Year:</label>
             <input
-              type="text"
+              type="number"
               formControlName="modelYear"
               class="form-control"
               placeholder="Model year"
@@ -133,12 +133,14 @@
             />
           </div>
           <div class="form-group">
-            <label for="description">Description:</label>
+            <label for="description" style="display: inherit;">Description:</label>
             <textarea
               formControlName="description"
               cols="30"
+              class="form-control"
               rows="10"
               placeholder="Description"
+              value="{{ selectedCar.description }}"
             ></textarea>
           </div>
         </div>
@@ -163,3 +165,4 @@
     </div>
   </div>
 </div>
+<app-car-add></app-car-add>

@@ -57,37 +57,35 @@ export class CarListComponent implements OnInit {
   createCarUpdateForm() {
     this.carUpdateForm = this.formBuilder.group({
       carId: [this.selectedCar.carId, Validators.required],
-      carName: [
-        this.selectedCar.carName,
-        Validators.required,
-        Validators.length > 2,
-      ],
+      carName: [this.selectedCar.carName,Validators.required],
       brandId: [this.selectedCar.brandId, Validators.required],
       colorId: [this.selectedCar.colorId, Validators.required],
       dailyPrice: [this.selectedCar.dailyPrice, Validators.required],
       modelYear: [this.selectedCar.modelYear, Validators.required],
-      descriptions: [this.selectedCar.description, Validators.required],
+      description: [this.selectedCar.description, Validators.required],
     });
   }
   update() {
+    console.log("update")
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
-      this.carService.update(carModel).subscribe(
-        (response) => {
+      this.carService.update(carModel).subscribe((response) => {
           this.toastrService.success(response.message, 'Success');
           this.getCars();
         },
         (responseError) => {
-          if (responseError.error.Errors.length > 0) {
-            for (let i = 0; i < responseError.error.Errors.length; i++) {
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
               this.toastrService.error(
-                responseError.error.Errors[i].ErrorMessage,
+                responseError.error.ValidationErrors[i].ErrorMessage,
                 'Problem'
               );
             }
           }
         }
       );
+    }else{
+      this.toastrService.error("Form is invalid")
     }
   }
   getBrands() {

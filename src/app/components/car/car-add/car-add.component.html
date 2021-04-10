@@ -1,1 +1,96 @@
-<p>car-add works!</p>
+<div
+  class="modal fade"
+  id="carModal"
+  tabindex="-1"
+  aria-labelledby="carModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="carModalLabel">Add Car</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="carAddForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="carName">Car Name:</label>
+            <input
+              type="text"
+              formControlName="carName"
+              id="carAddName"
+              class="form-control"
+              placeholder="Car name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="brandName">Brand Name:</label>
+            <select class="form-select" formControlName="brandId">
+              <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
+                {{ brand.brandName }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="colorName">Color Name:</label>
+            <select class="form-select" formControlName="colorId">
+              <option *ngFor="let color of colors" [ngValue]="color.colorId">
+                {{ color.colorName }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dailyPrice">Daily Price:</label>
+            <input
+              type="number"
+              formControlName="dailyPrice"
+              class="form-control"
+              placeholder="Daily Price"
+            />
+          </div>
+          <div class="form-group">
+            <label for="modelYear">Model Year:</label>
+            <input
+              type="number"
+              formControlName="modelYear"
+              class="form-control"
+              placeholder="Model year"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description" style="display: inherit;">Description:</label>
+            <textarea
+              formControlName="description"
+              cols="30"
+              class="form-control"
+              rows="10"
+              placeholder="Description"
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="add()"
+            data-bs-dismiss="modal"
+          >
+            Save Car
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

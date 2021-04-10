@@ -40,10 +40,10 @@ export class BrandAddComponent implements OnInit {
           }, 2000);
         },
         (responseError) => {
-          if (responseError.error.Errors.length > 0) {
-            console.log(responseError.error.Errors)
-            for (let i = 0; i < responseError.error.Errors.length; i++) {
-              this.toastrService.error(responseError.error.Errors[i].ErrorMesage,"Doğrulama hatası");
+          if (responseError.error.ValidationErrors.length > 0) {
+            console.log(responseError.error.ValidationErrors)
+            for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
+              this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMesage,"Doğrulama hatası");
             }
             
           }
