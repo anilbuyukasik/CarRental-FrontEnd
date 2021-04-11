@@ -34,10 +34,10 @@ export class CarService {
     let newPath = this.apiUrl + 'carimages/getbycarid?carId=' + carId;
     return this.httpClient.get<ListResponseModel<CarImage>>(newPath);
   }
-  add(car:Car):Observable<ResponseModel>{
+  add(car:CarDetail):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl + "cars/add",car);
   }
-  update(car:Car):Observable<ResponseModel>{
+  update(car:CarDetail):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl + "cars/update",car);
   }
 }

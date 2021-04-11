@@ -43,7 +43,7 @@
               class="btn btn-warning"
               data-bs-toggle="modal"
               data-bs-target="#carUpdateModal"
-              (click)="setSelectedCar(car);"
+              (click)="setSelectedCar(car)"
             >
               Modify
             </button>
@@ -72,96 +72,158 @@
           aria-label="Close"
         ></button>
       </div>
-      <form [formGroup]="carUpdateForm">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="carId">Car Id:</label>
-            <input
-              type="text"
-              readonly
-              formControlName="carId"
-              id="carId"
-              class="form-control"
-              value="{{ selectedCar.carId }}"
-            />
-          </div>
-          <div class="form-group">
-            <label for="carName">Car Name:</label>
-            <input
-              type="text"
-              formControlName="carName"
-              id="carUpdateName"
-              class="form-control"
-              placeholder="Car name"
-              value="{{ selectedCar.carName }}"
-            />
-          </div>
-          <div class="form-group">
-            <label for="brandName">Brand Name:</label>
-            <select class="form-select" formControlName="brandId">
-              <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
-                {{ brand.brandName }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="colorName">Color Name:</label>
-            <select class="form-select" formControlName="colorId">
-              <option *ngFor="let color of colors" [ngValue]="color.colorId" class="option" selected="{{selectedCar.colorId}}">
-                {{ color.colorName }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="dailyPrice">Daily Price:</label>
-            <input
-              type="number"
-              formControlName="dailyPrice"
-              class="form-control"
-              placeholder="Car name"
-              value="{{ selectedCar.dailyPrice }}"
-            />
-          </div>
-          <div class="form-group">
-            <label for="modelYear">Model Year:</label>
-            <input
-              type="number"
-              formControlName="modelYear"
-              class="form-control"
-              placeholder="Model year"
-              value="{{ selectedCar.modelYear }}"
-            />
-          </div>
-          <div class="form-group">
-            <label for="description" style="display: inherit;">Description:</label>
-            <textarea
-              formControlName="description"
-              cols="30"
-              class="form-control"
-              rows="10"
-              placeholder="Description"
-              value="{{ selectedCar.description }}"
-            ></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <button
+            class="nav-link active"
+            id="nav-car-details"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-cardetails"
             type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
+            role="tab"
+            aria-controls="nav-cardetails"
+            aria-selected="true"
           >
-            Close
+            Car Details
           </button>
           <button
+            class="nav-link"
+            id="nav-car-images"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-carimages"
             type="button"
-            class="btn btn-primary"
-            (click)="update()"
-            data-bs-dismiss="modal"
+            role="tab"
+            aria-controls="nav-carimages"
+            aria-selected="false"
           >
-            Save Car
+            Car Images
           </button>
         </div>
-      </form>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="nav-cardetails"
+          role="tabpanel"
+          aria-labelledby="nav-car-details"
+        >
+          <form [formGroup]="carUpdateForm">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="carId">Car Id:</label>
+                <input
+                  type="text"
+                  readonly
+                  formControlName="carId"
+                  id="carId"
+                  class="form-control"
+                  value="{{ selectedCar.carId }}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="carName">Car Name:</label>
+                <input
+                  type="text"
+                  formControlName="carName"
+                  id="carUpdateName"
+                  class="form-control"
+                  placeholder="Car name"
+                  value="{{ selectedCar.carName }}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="brandName">Brand Name:</label>
+                <select class="form-select" formControlName="brandId">
+                  <option
+                    *ngFor="let brand of brands"
+                    [ngValue]="brand.brandId"
+                  >
+                    {{ brand.brandName }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="colorName">Color Name:</label>
+                <select class="form-select" formControlName="colorId">
+                  <option
+                    *ngFor="let color of colors"
+                    [ngValue]="color.colorId"
+                    class="option"
+                    selected="{{ selectedCar.colorId }}"
+                  >
+                    {{ color.colorName }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="dailyPrice">Daily Price:</label>
+                <input
+                  type="number"
+                  formControlName="dailyPrice"
+                  class="form-control"
+                  placeholder="Car name"
+                  value="{{ selectedCar.dailyPrice }}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="modelYear">Model Year:</label>
+                <input
+                  type="number"
+                  formControlName="modelYear"
+                  class="form-control"
+                  placeholder="Model year"
+                  value="{{ selectedCar.modelYear }}"
+                />
+              </div>
+              <div class="form-group">
+                <label for="description" style="display: inherit"
+                  >Description:</label
+                >
+                <textarea
+                  formControlName="description"
+                  cols="30"
+                  class="form-control"
+                  rows="10"
+                  placeholder="Description"
+                  value="{{ selectedCar.description }}"
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="update()"
+                data-bs-dismiss="modal"
+              >
+                Save Car
+              </button>
+            </div>
+          </form>
+        </div>
+            <div
+              class="tab-pane fade modal-body"
+              id="nav-carimages"
+              role="tabpanel"
+              aria-labelledby="nav-profile-tab"
+            >
+              <div class="form-group">
+                <label for="modelYear">Car Images:</label>
+                <input
+                  type="file"
+                  formControlName="carImage"
+                  class="form-control"
+                />
+              </div>
+            </div>
+      </div>
     </div>
   </div>
 </div>

@@ -8,6 +8,7 @@ import { CarDetail } from 'src/app/models/car-detail';
 import { Customer } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { ToastrService } from 'ngx-toastr';
+import { CustomerDetail } from 'src/app/models/customerDetail';
 
 @Component({
   selector: 'app-car',
@@ -33,7 +34,7 @@ export class CarComponent implements OnInit {
   currentCarImage: CarImage;
   dataLoaded = false;
   carFilterText: string;
-  customers: Customer[];
+  customers: CustomerDetail[];
 
   constructor(
     private carService: CarService,
