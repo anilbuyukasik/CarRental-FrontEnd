@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OperationClaim } from 'src/app/models/operationClaim';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navi',
@@ -7,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NaviComponent implements OnInit {
 
-  constructor() { }
+  user:User;
+  claims:OperationClaim[];
+  constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
   }

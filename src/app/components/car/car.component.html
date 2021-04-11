@@ -268,12 +268,6 @@
             <label for="returnDate">Return Date:</label>
             <input type="date" name="returnDate" class="form-control" />
           </div>
-          <div class="col-md-12">
-            <label for="customerName">Customer Name:</label>
-            <select class="form-select">
-              <option *ngFor="let customer of customers" [value]="customer.customerId" >{{customer.firstName}} {{customer.lastName}}</option>
-            </select>
-          </div>
         </div>
       </div>
       <div class="modal-footer">
