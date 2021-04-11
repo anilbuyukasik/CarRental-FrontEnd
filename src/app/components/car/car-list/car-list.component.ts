@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { CarDetail } from 'src/app/models/car-detail';
+import { CarImage } from 'src/app/models/carImage';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
@@ -28,9 +29,12 @@ export class CarListComponent implements OnInit {
     imagePaths: [],
   };
   carUpdateForm: FormGroup;
+  uploadImageForm:FormGroup;
   carFilterText: string;
   brands: Brand[];
   colors: Color[];
+  carImages: CarImage[] = [];
+  currentCarImage:CarImage;
   constructor(
     private carService: CarService,
     private formBuilder: FormBuilder,
@@ -97,5 +101,14 @@ export class CarListComponent implements OnInit {
     this.colorService.getColors().subscribe(response=>{
       this.colors=response.data
     });
+  }
+  getCarImageById(carId: number) {
+    this.carService
+      .getCarImageByCarId(this.selectedCar.carId)
+      .subscribe((response) => {
+        this.carImages = response.data;
+        console.log(this.carImages);
+      });
+      this.toastrService.success("details viewed")
   }
 }

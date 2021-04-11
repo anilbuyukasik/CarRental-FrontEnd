@@ -43,7 +43,7 @@
               class="btn btn-warning"
               data-bs-toggle="modal"
               data-bs-target="#carUpdateModal"
-              (click)="setSelectedCar(car)"
+              (click)="setSelectedCar(car); getCarImageById(car.carId)"
             >
               Modify
             </button>
@@ -208,21 +208,51 @@
             </div>
           </form>
         </div>
-            <div
-              class="tab-pane fade modal-body"
-              id="nav-carimages"
-              role="tabpanel"
-              aria-labelledby="nav-profile-tab"
-            >
-              <div class="form-group">
-                <label for="modelYear">Car Images:</label>
-                <input
-                  type="file"
-                  formControlName="carImage"
-                  class="form-control"
-                />
-              </div>
+        <div
+          class="tab-pane fade modal-body"
+          id="nav-carimages"
+          role="tabpanel"
+          aria-labelledby="nav-profile-tab"
+        >
+          <form [formGroup]="uploadImageForm">
+            <div class="form-group">
+              <label for="modelYear">Car Images:</label>
+              <input
+                type="file"
+                formControlName="carImage"
+                class="form-control"
+              />
             </div>
+          </form>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Save Car Image
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-md-6" *ngFor="let carImage of carImages">
+
+              <div class="card" >
+                <img class="card-img-top" src="https://localhost:44322{{ carImage.imagePath }}" style="width: auto; height: 150px" alt="Card image cap">
+                <div class="card-body">
+                  <a href="#" class="btn btn-danger">Delete Image</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
