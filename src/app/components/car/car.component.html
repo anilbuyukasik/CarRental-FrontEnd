@@ -26,7 +26,7 @@
       <p [class]="getCurrentCarImage(currentCar.carId)"></p> -->
       <img
         class="card-img-top"
-        src="https://localhost:44322{{ car.imagePaths[0].imagePath }}"
+        src="https://localhost:44322{{ car.imagePaths.length > 0 ? car.imagePaths[0].imagePath : '/Images/default.jpg' }}"
         alt="Card image cap"
         width="auto"
         height="150px"
@@ -104,7 +104,7 @@
                   [class]="getCurrentSlideClass(carImage)"
                 >
                   <img
-                    src="https://localhost:44322{{ carImage.imagePath }}"
+                    src="https://localhost:44322{{ carImage.imagePath ? carImage.imagePath : '/Images/default.jpg'}}"
                     class="d-block w-100"
                     alt="..."
                     style="width: auto; height: 300px"
